@@ -1,4 +1,9 @@
-language: Java
-script:
-	- clean ./mvnw package java -jar ./target/project-lvl1-s497-1.0-SNAPSHOT-jar-with-dependencies.jar
+language: java
+jdk: oraclejdk8
 
+install: true
+script: ./mvnw clean install
+
+cache:
+	directories:
+		- $HOME/.m2
