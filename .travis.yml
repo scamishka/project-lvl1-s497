@@ -1,2 +1,4 @@
 language: Java
-JDK: Oraclejdk11
+script:
+  - mvn clean package
+
