@@ -9,7 +9,7 @@ clean:
 build-run: build run
 
 build: 
-	./mvnw clean package
+	./mvnw verify
 
 update-libs:
 	./mvnw versions:update-properties

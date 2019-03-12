@@ -68,7 +68,6 @@
 
             <!-- COMPILER (Java10+ and lombok compatible) -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
@@ -76,18 +75,10 @@
                         <arg>-parameters</arg>
                     </compilerArgs>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.ow2.asm</groupId>
-                        <artifactId>asm</artifactId>
-                        <version>6.2.1</version> <!-- Use newer version of ASM -->
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <!-- JAR with dependencies -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
+            <plugin>                
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>${maven-assembly-plugin.version}</version>
                 <configuration>
@@ -133,8 +124,7 @@
             </plugin>
 
             <!-- Minimum maven version -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
+            <plugin>                
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <version>${maven-enforcer-plugin.version}</version>
                 <executions>
@@ -155,8 +145,7 @@
             </plugin>
 
             <!-- SUREFIRE (compatible with JUnit 5+, Java 9+, Lombok) -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
+            <plugin>                
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
