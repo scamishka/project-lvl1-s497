@@ -1,9 +1,1 @@
 language: java
-jdk: oraclejdk11
-
-install: true
-script: ./mvnw clean install
-
-cache:
-	directories:
-		- $HOME/.m2
