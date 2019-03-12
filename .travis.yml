@@ -1,2 +1,4 @@
+language: java
+jdk: oraclejdk11
 install: true
 script: ./mvnw clean install
