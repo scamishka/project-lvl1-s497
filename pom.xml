@@ -33,7 +33,7 @@
 
     <dependencies>
 
-        <!-- COMMON LIBS (Log4J2 & Vavr) -->
+        <!-- COMMON LIBS (Log4J2) -->
 	<dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-math3</artifactId>
@@ -46,11 +46,7 @@
             <version>${log4j-slf4j-impl.version}</version>
             <optional>true</optional>
         </dependency>
-        
-	<!-- CODE GENERATION (Lombok & CheckerFramework) -->
-      
-        <!-- TEST (JUnit 5 & Mockito) -->
-      
+              
     </dependencies>
 
     <build>
