@@ -1,5 +1,4 @@
 language: java
 JDK: Oraclejdk11
-script:
-	-./mvnw clean package
+script: ./mvnw clean package
 
