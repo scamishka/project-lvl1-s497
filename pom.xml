@@ -65,8 +65,8 @@
 				</dependency>
 			</dependencies>
 		</plugin>
-
-            <!-- COMPILER (Java10+ and lombok compatible) -->
+		
+	    <!-- COMPILER (Java10+ and lombok compatible) -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
@@ -154,7 +154,7 @@
                     </includes>
                 </configuration>
             </plugin>
-
+		<!--подключаем плагин conarqube-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
@@ -166,7 +166,7 @@
                 <artifactId>versions-maven-plugin</artifactId>
                 <configuration>
                     <generateBackupPoms>false</generateBackupPoms>
-                    <!--rulesUri>file://${project.basedir}/maven-version-rules.xml</rulesUri-->
+                    <rulesUri>file://${project.basedir}/maven-version-rules.xml</rulesUri>
                 </configuration>
             </plugin>
 
