@@ -16,7 +16,7 @@ public class Slot {
 
 
 
-        for (; capital > 0;) {
+        do {
 
             System.out.printf("У Вас %,d$, ставка - %d$\n", capital, stavka);
             System.out.println("Крутим барабаны!Розыгрыш принёс следующие результаты:");
@@ -32,7 +32,7 @@ public class Slot {
             }
 
         }
-
+    while (capital > 0);
     }
 }
 
