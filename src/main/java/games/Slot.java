@@ -18,24 +18,24 @@ public class Slot {
 
         for (int i = capital; i >= 0; i -= stavka) {
 
-            System.out.printf("У Вас %,d$, ставка - %d$", capital, stavka);
+            System.out.printf("У Вас %,d$, ставка - %d$\n", capital, stavka);
             System.out.println();
             System.out.println("Крутим барабаны!Розыгрыш принёс следующие результаты:");
             firstCounter = (firstCounter + (int) round(random() * 100)) % size;
             secondCounter = (secondCounter + (int) round(random() * 100)) % size;
             thirdCounter = (thirdCounter + (int) round(random() * 100)) % size;
-            System.out.printf("первый барабан - %d второй барабан - %d третий барабан - %d", firstCounter, secondCounter, thirdCounter);
+            System.out.printf("первый барабан - %d второй барабан - %d третий барабан - %d\n", firstCounter, secondCounter, thirdCounter);
             System.out.println();
             if (firstCounter == secondCounter && firstCounter == thirdCounter) {
                 capital += winSumma;
                 i = capital;
-                System.out.printf("Выйгрыш %,d$, ваш капитал теперь составляет: %,d$", winSumma, capital);
+                System.out.printf("Выйгрыш %,d$, ваш капитал теперь составляет: %,d$\n", winSumma, capital);
                 System.out.println();
             }
             else {
                 capital -= stavka;
                 i = capital;
-                System.out.printf("Проигрыш %d$, ваш капитал теперь составляет: %,d$", stavka, capital);
+                System.out.printf("Проигрыш %d$, ваш капитал теперь составляет: %,d$\n", stavka, capital);
                 System.out.println();
             }
 
