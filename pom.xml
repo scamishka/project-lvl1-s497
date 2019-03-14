@@ -16,6 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.release>11</maven.compiler.release>
+	<maven.compiler.parameters>true</maven.compiler.parameters>
 
         <!--Libs-->
 	<commons-math3.version>3.6.1</commons-math3.version>
@@ -57,7 +58,6 @@
 			<artifactId>spotbugs-maven-plugin</artifactId>
 			<version>3.1.11</version>
 			<dependencies>
-				<!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
 				<dependency>
 					<groupId>com.github.spotbugs</groupId>
 					<artifactId>spotbugs</artifactId>
@@ -70,11 +70,6 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <compilerArgs>
-                        <arg>-parameters</arg>
-                    </compilerArgs>
-                </configuration>
             </plugin>
 
             <!-- JAR with dependencies -->
@@ -154,7 +149,6 @@
                     </includes>
                 </configuration>
             </plugin>
-		<!--подключаем плагин conarqube-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
@@ -170,8 +164,7 @@
                 </configuration>
             </plugin>
 
-		<!--подключение плагина check style-->
-		<plugin>
+	    <plugin>
 		<groupId>org.apache.maven.plugins</groupId>
 		<artifactId>maven-checkstyle-plugin</artifactId>
 		<version>2.17</version>
