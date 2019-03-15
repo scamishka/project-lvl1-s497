@@ -25,11 +25,11 @@ public class Slot {
             thirdCounter = (thirdCounter + (int) round(random() * 100)) % size;
             System.out.printf("первый барабан - %d второй барабан - %d третий барабан - %d\n", firstCounter, secondCounter, thirdCounter);
             if (firstCounter == secondCounter && firstCounter == thirdCounter) {
-                capital+= winSumma;
+                capital = capital + winSumma;
                 System.out.printf("Выйгрыш %,d$, ваш капитал теперь составляет: %,d$\n", winSumma, capital);
             }
             else {
-                capital-=stavka;
+                capital = capital - stavka;
                 System.out.printf("Проигрыш %d$, ваш капитал теперь составляет: %,d$\n", stavka, capital);
             }
 
