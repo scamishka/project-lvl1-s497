@@ -6,3 +6,7 @@ maven-wrapper.jar
 
 #игнорим старые версии плагинов и библиотек maven
 pom.xml.versionsBackup
+
+#игнор idea
+.idea/
+project-lvl1-s497.iml
