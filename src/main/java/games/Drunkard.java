@@ -7,62 +7,48 @@ public class Drunkard {
     private static int[][] playersCards = new int[2][CARDS_TOTAL_COUNT + 1];
     private static int[] playersCardTails = new int[2];
     private static int[] playersCardHeads = {CARDS_TOTAL_COUNT / 2, CARDS_TOTAL_COUNT / 2}; //18
-//    private static int[] allCards = new int[CARDS_TOTAL_COUNT];
 
     public static void main(String... __) {
         int count = 0;
         cardsAddPlayers(CardUtils.cardbatch());
+
         while (getLostPlayer() == 0) {
             count++;
             int card1 = getCardFromPlayer(0);
             int card2 = getCardFromPlayer(1);
-            System.out.printf("Итерация №%d%n Игрок №1 карта: %s; Игрок №2 карта: %s%n", count, CardUtils.toString(card1), CardUtils.toString(card2));
+            System.out.printf("Итерация №%d\n Игрок №1 карта: %s; Игрок №2 карта: %s\n", count, CardUtils.toString(card1), CardUtils.toString(card2));
 
-            switch (getWinnerCard(card1, card2)) {
-                case 1:
-                    addCards2Player(0, 2);
-                    System.out.println("Выйграл Игрок №1!");
-                    System.out.printf("У Игрока №1 %d, у игрока №2 %d карт %n %n", playerCardsLength(0), playerCardsLength(1));
-                    break;
-                case 2:
-                    addCards2Player(1, 2);
-                    System.out.println("Выйграл Игрок №2!");
-                    System.out.printf("У Игрока №1 %d, у игрока №2 %d карт %n %n", playerCardsLength(0), playerCardsLength(1));
-                    break;
-                case 0:
-                    addCards2Player(0, 1);
-                    System.out.println("Ничья!Все остаются при своих! ");
-                    System.out.printf("У Игрока №1 %d, у игрока №2 %d карт %n %n", playerCardsLength(0), playerCardsLength(1));
-                    break;
+
+            if (getWinnerPlayer(card1, card2) == 0) {
+                addCards2Player(0, card1);
+                addCards2Player(1, card2);
+                checkTail();
+                System.out.println("Ничья!Все остаются при своих! ");
+                System.out.printf("У Игрока №1 %d, у игрока №2 %d карт \n \n", playerCardsLength(0), playerCardsLength(1));
+            }
+            else if (getWinnerPlayer(card1, card2) > 0) {
+                addCards2Player(0, card1, card2);
+                checkTail();
+                System.out.println("Выйграл Игрок №1!");
+                System.out.printf("У Игрока №1 %d, у игрока №2 %d карт %n \n", playerCardsLength(0), playerCardsLength(1));
+
+            } else {
+                addCards2Player(1, card1, card2);
+                checkTail();
+                System.out.println("Выйграл Игрок №2!");
+                System.out.printf("У Игрока №1 %d, у игрока №2 %d карт \n \n", playerCardsLength(0), playerCardsLength(1));
             }
         }
-        if (getLostPlayer() == 1) {
-            System.out.println("Победитель игрок №2");
-        }
-        else
-            System.out.println("Победитель игрок №1");
+        System.out.printf("Победитель игрок №%s\n", getLostPlayer() == 1 ? "2" : "1");
     }
 
-    private static int getWinnerCard(int card1, int card2) {
 
-        if (getSixAceRule(card1, card2) == 1)
-            return 1;
-        if (getSixAceRule(card1, card2) == -1)
-            return 2;
-        else {
-            if (CardUtils.getPar(card1).ordinal() > CardUtils.getPar(card2).ordinal()) return 1;
-            if (CardUtils.getPar(card1).ordinal() == CardUtils.getPar(card2).ordinal()) return 0;
-            else return 2;
-        }
-    }
 
-    private static int getSixAceRule(int card1, int card2) {
-        if (CardUtils.getPar(card1).ordinal() == 0 && CardUtils.getPar(card2).ordinal() == (PARS_TOTAL_COUNT - 1))
-            return 1;
-        if (CardUtils.getPar(card2).ordinal() == 0 && CardUtils.getPar(card1).ordinal() == (PARS_TOTAL_COUNT - 1))
-            return -1;
-        else
-            return 0;
+
+    private static int getWinnerPlayer(int card1, int card2) {
+
+        int result = card1 % PARS_TOTAL_COUNT - card2 % PARS_TOTAL_COUNT;
+        return Math.abs(result) == 8 ? -result : result;
     }
 
     private static int getLostPlayer() {
@@ -72,7 +58,7 @@ public class Drunkard {
         int headPlayer2 = playersCardHeads[1];
 
         if (tailPlayer1 == headPlayer1)
-            return 1;
+            return 1 ;
         if (tailPlayer2 == headPlayer2)
             return -1;
         else
@@ -99,25 +85,14 @@ public class Drunkard {
         return playersCards[playerIndex][tail];
     }
 
-    private static void addCards2Player(int playerIndex, int varargs) {
+    private static void addCards2Player(int playerIndex, int... cards) {
+        int[] playerCards = playersCards[playerIndex];
+        int end = playersCardHeads[playerIndex];
 
-        switch (varargs) {
-            case 1:
-                playersCards[0][playersCardHeads[0]] = getCardFromPlayer(0);
-                playersCards[1][playersCardHeads[1]] = getCardFromPlayer(1);
-                checkTail();
-                playersCardHeads[0] = incrementIndex(playersCardHeads[0]);
-                playersCardHeads[1] = incrementIndex(playersCardHeads[1]);
-                break;
-            case 2:
-                playersCards[playerIndex][playersCardHeads[playerIndex]] = getCardFromPlayer(0);
-                playersCards[playerIndex][incrementIndex(playersCardHeads[playerIndex])] = getCardFromPlayer(1);
-                checkTail();
-                playersCardHeads[playerIndex] = incrementIndex(playersCardHeads[playerIndex]);
-                playersCardHeads[playerIndex] = incrementIndex(playersCardHeads[playerIndex]);
-                break;
-            default:
-                break;
+        for (int card : cards) {
+            playerCards[end] = card;
+            playersCardHeads[playerIndex] = incrementIndex(end);
+            end = playersCardHeads[playerIndex];
         }
     }
 
@@ -138,6 +113,5 @@ public class Drunkard {
         playersCardTails[1] = incrementIndex(playersCardTails[1]);
 
     }
-
 }
 
