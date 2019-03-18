@@ -37,11 +37,13 @@ public class CardUtils {
         return getPar(cardNumber) + " " + getSuit(cardNumber);
     }
 
-    public static int[] cardbatch() {
-        int [] cards = new int [36];
-        for (int i = 0; i < CARDS_TOTAL_COUNT; i++) {
-            cards[i] = i;
-        }
+    public static int[] getShuffleCards() {
+
+        int[] cards = {
+                0, 1, 2, 3, 4, 5, 6, 7, 8,  // бубны
+                9, 10, 11, 12, 13, 14, 15, 16, 17,  // червы
+                18, 19, 20, 21, 22, 23, 24, 25, 26,  // трефы
+                27, 28, 29, 30, 31, 32, 33, 34, 35}; // пики
         MathArrays.shuffle(cards);
         return cards;
     }

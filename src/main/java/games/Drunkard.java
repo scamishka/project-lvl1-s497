@@ -10,7 +10,7 @@ public class Drunkard {
 
     public static void main(String... __) {
         int count = 0;
-        cardsAddPlayers(CardUtils.cardbatch());
+        cardsAddPlayers(CardUtils.getShuffleCards());
 
         while (getLostPlayer() == 0) {
             count++;
@@ -41,9 +41,6 @@ public class Drunkard {
         }
         System.out.printf("Победитель игрок №%s\n", getLostPlayer() == 1 ? "2" : "1");
     }
-
-
-
 
     private static int getWinnerPlayer(int card1, int card2) {
 
