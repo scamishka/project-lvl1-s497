@@ -25,22 +25,22 @@ public class BlackJack {
             initRound();
             int nextCard;
             nextCard = addCard2Player(0);
-            log.info("Вам выпала карта {}\n", CardUtils.toString(nextCard));
+            log.info("Вам выпала карта {}", CardUtils.toString(nextCard));
             nextCard = addCard2Player(0);
-            log.info("Вам выпала карта {}\n", CardUtils.toString(nextCard));
+            log.info("Вам выпала карта {}", CardUtils.toString(nextCard));
 
             for (int i = 2; i < MAX_CARDS_COUNT && sum(0) < 20; i++) {
                 if (!confirm("Берём карту?")) {
                     break;
                 }
                 nextCard = addCard2Player(0);
-                log.info("Вам выпала карта {}\n", CardUtils.toString(nextCard));
-                log.info("Ваша сумма {}\n", sum(0));
+                log.info("Вам выпала карта {}", CardUtils.toString(nextCard));
+                log.info("Ваша сумма {}", sum(0));
             }
 
-            log.info("Ход робота\n");
+            log.info("Ход робота");
             nextCard = addCard2Player(1);
-            log.info("Роботу выпала карта {}\n", CardUtils.toString(nextCard));
+            log.info("Роботу выпала карта {}", CardUtils.toString(nextCard));
             nextCard = addCard2Player(1);
             log.info("Роботу выпала карта {}\n", CardUtils.toString(nextCard));
             log.info("Сумма очков робота {}\n", sum(1));
@@ -48,20 +48,20 @@ public class BlackJack {
             for (int i = 2; (i < MAX_CARDS_COUNT && sum(1) < 17); i++) {
                 log.info("Робот решил взять ещё\n");
                 nextCard = addCard2Player(1);
-                log.info("Роботу выпала карта {}\n", CardUtils.toString(nextCard));
+                log.info("Роботу выпала карта {}", CardUtils.toString(nextCard));
             }
 
-            log.info("Сумма ваших очков - {} Сумма робота - {}\n", getFinalSum(0), getFinalSum(1));
+            log.info("Сумма ваших очков - {} Сумма робота - {}", getFinalSum(0), getFinalSum(1));
             if (getFinalSum(0) == 0 && getFinalSum(1) == 0) {
                 log.info("Победитель отсутствует. Ваши деньги остаются при вас.");
             } else if (getFinalSum(0) > getFinalSum(1)) {
                 playersMoney[0] = playersMoney[0] + rate;
                 playersMoney[1] = playersMoney[1] - rate;
-                log.info("Вы выйграли раунд! Получаете {}$\n", rate);
+                log.info("Вы выйграли раунд! Получаете {}$", rate);
             } else if (getFinalSum(0) < getFinalSum(1)) {
                 playersMoney[0] = playersMoney[0] - rate;
                 playersMoney[1] = playersMoney[1] + rate;
-                log.info("Вы проиграли раунд! Теряете {}$\n", rate);
+                log.info("Вы проиграли раунд! Теряете {}$", rate);
             } else
                 log.info("Ничья! Ваши деньги остаются при вас.");
 
@@ -98,7 +98,7 @@ public class BlackJack {
     }
 
     private static void initRound() {
-        log.info("\nУ Вас {}$, у робота - {}$. Начинаем новый раунд!\n", playersMoney[0], playersMoney[1]);
+        log.info("У Вас {}$, у робота - {}$. Начинаем новый раунд!", playersMoney[0], playersMoney[1]);
         cards = CardUtils.getShuffleCards();
         playersCards = new int[2][MAX_CARDS_COUNT];
         playersCursors = new int[2];
