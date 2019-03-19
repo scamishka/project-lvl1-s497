@@ -19,29 +19,29 @@ public class Drunkard {
             count++;
             int card1 = getCardFromPlayer(0);
             int card2 = getCardFromPlayer(1);
-            log.info("Итерация №{}\n Игрок №1 карта: {}; Игрок №2 карта: {}\n", count, CardUtils.toString(card1), CardUtils.toString(card2));
+            log.info("Итерация №{}\n Игрок №1 карта: {}; Игрок №2 карта: {}", count, CardUtils.toString(card1), CardUtils.toString(card2));
 
 
             if (getWinnerPlayer(card1, card2) == 0) {
                 addCards2Player(0, card1);
                 addCards2Player(1, card2);
                 checkTail();
-                log.info("Ничья!Все остаются при своих! ");
-                log.info("У Игрока №1 {}, у игрока №2 {} карт \n \n", playerCardsLength(0), playerCardsLength(1));
+                log.info("Ничья!Все остаются при своих!");
+                log.info("У Игрока №1 {}, у игрока №2 {} карт", playerCardsLength(0), playerCardsLength(1));
             } else if (getWinnerPlayer(card1, card2) > 0) {
                 addCards2Player(0, card1, card2);
                 checkTail();
                 log.info("Выйграл Игрок №1!");
-                log.info("У Игрока №1 {}, у игрока №2 {} карт \n", playerCardsLength(0), playerCardsLength(1));
+                log.info("У Игрока №1 {}, у игрока №2 {} карт ", playerCardsLength(0), playerCardsLength(1));
 
             } else {
                 addCards2Player(1, card1, card2);
                 checkTail();
                 log.info("Выйграл Игрок №2!");
-                log.info("У Игрока №1 {}, у игрока №2 {} карт \n \n", playerCardsLength(0), playerCardsLength(1));
+                log.info("У Игрока №1 {}, у игрока №2 {} карт ", playerCardsLength(0), playerCardsLength(1));
             }
         }
-        log.info("Победитель игрок №{}\n", getLostPlayer() == 1 ? "2" : "1");
+        log.info("Победитель игрок №{}", getLostPlayer() == 1 ? "2" : "1");
     }
 
     private static int getWinnerPlayer(int card1, int card2) {
