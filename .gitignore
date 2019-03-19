@@ -10,3 +10,6 @@ pom.xml.versionsBackup
 #игнор idea
 .idea/
 project-lvl1-s497.iml
+
+#игнор logs
+logs/

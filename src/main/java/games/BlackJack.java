@@ -1,6 +1,9 @@
 package games;
 
+import org.slf4j.Logger;
+
 import java.io.IOException;
+
 import static games.Choice.getCharacterFromUser;
 
 public class BlackJack {
@@ -14,6 +17,7 @@ public class BlackJack {
     private static final int MAX_VALUE = 21;
     private static final int MAX_CARDS_COUNT = 8;
     private static final int rate = 10;
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(BlackJack.class);
 
     public static void main(String... __) throws IOException {
 
@@ -21,51 +25,51 @@ public class BlackJack {
             initRound();
             int nextCard;
             nextCard = addCard2Player(0);
-            System.out.println("Вам выпала карта " + CardUtils.toString(nextCard));
+            log.info("Вам выпала карта %s\n", CardUtils.toString(nextCard));
             nextCard = addCard2Player(0);
-            System.out.println("Вам выпала карта " + CardUtils.toString(nextCard));
+            log.info("Вам выпала карта %s\n", CardUtils.toString(nextCard));
 
             for (int i = 2; i < MAX_CARDS_COUNT && sum(0) < 20; i++) {
                 if (!confirm("Берём карту?")) {
                     break;
                 }
                 nextCard = addCard2Player(0);
-                System.out.println("Вам выпала карта " + CardUtils.toString(nextCard));
-                System.out.println("Ваша сумма " + sum(0));
+                log.info("Вам выпала карта %s\n", CardUtils.toString(nextCard));
+                log.info("Ваша сумма %d\n", sum(0));
             }
 
-            System.out.printf("Ход робота\n");
+            log.info("Ход робота\n");
             nextCard = addCard2Player(1);
-            System.out.println("Роботу выпала карта " + CardUtils.toString(nextCard));
+            log.info("Роботу выпала карта %s\n", CardUtils.toString(nextCard));
             nextCard = addCard2Player(1);
-            System.out.println("Роботу выпала карта " + CardUtils.toString(nextCard));
-            System.out.println(sum(1));
+            log.info("Роботу выпала карта %s\n", CardUtils.toString(nextCard));
+            log.info("Сумма очков робота %d\n", sum(1));
 
             for (int i = 2; (i < MAX_CARDS_COUNT && sum(1) < 17); i++) {
-                System.out.println("Робот решил взять ещё\n");
+                log.info("Робот решил взять ещё\n");
                 nextCard = addCard2Player(1);
-                System.out.println("Роботу выпала карта " + CardUtils.toString(nextCard));
+                log.info("Роботу выпала карта %s\n", CardUtils.toString(nextCard));
             }
 
-            System.out.printf("Сумма ваших очков - %d Сумма робота - %d\n", getFinalSum(0), getFinalSum(1));
+            log.info("Сумма ваших очков - %d Сумма робота - %d\n", getFinalSum(0), getFinalSum(1));
             if (getFinalSum(0) == 0 && getFinalSum(1) == 0) {
-                System.out.println("Победитель отсутствует. Ваши деньги остаются при вас.");
+                log.info("Победитель отсутствует. Ваши деньги остаются при вас.");
             } else if (getFinalSum(0) > getFinalSum(1)) {
                 playersMoney[0] = playersMoney[0] + rate;
                 playersMoney[1] = playersMoney[1] - rate;
-                System.out.printf("Вы выйграли раунд! Получаете %d$\n", rate);
+                log.info("Вы выйграли раунд! Получаете %d$\n", rate);
             } else if (getFinalSum(0) < getFinalSum(1)) {
                 playersMoney[0] = playersMoney[0] - rate;
                 playersMoney[1] = playersMoney[1] + rate;
-                System.out.printf("Вы проиграли раунд! Теряете %d$\n", rate);
+                log.info("Вы проиграли раунд! Теряете %d$\n", rate);
             } else
-                System.out.println("Ничья! Ваши деньги остаются при вас.");
+                log.info("Ничья! Ваши деньги остаются при вас.");
 
         }
         if (playersMoney[0] > 0)
-            System.out.println("Вы выиграли! Поздравляем!");
+            log.info("Вы выиграли! Поздравляем!");
         else
-            System.out.println("Вы проиграли. Соболезнуем...");
+            log.info("Вы проиграли. Соболезнуем...");
 
     }
 
@@ -94,7 +98,7 @@ public class BlackJack {
     }
 
     private static void initRound() {
-        System.out.printf("\nУ Вас %d$, у робота - %d$. Начинаем новый раунд!\n", playersMoney[0], playersMoney[1]);
+        log.info("\nУ Вас %d$, у робота - %d$. Начинаем новый раунд!\n", playersMoney[0], playersMoney[1]);
         cards = CardUtils.getShuffleCards();
         playersCards = new int[2][MAX_CARDS_COUNT];
         playersCursors = new int[2];
@@ -123,7 +127,7 @@ public class BlackJack {
     }
 
     private static boolean confirm(String message) throws IOException {
-        System.out.println(message + " \"Y\" - Да, {любой другой символ} - нет (Что бы выйти из игры, нажмите Ctrl + C)");
+        log.info(message + " \"Y\" - Да, {любой другой символ} - нет (Что бы выйти из игры, нажмите Ctrl + C)");
         switch (getCharacterFromUser()) {
             case 'Y':
             case 'y':
