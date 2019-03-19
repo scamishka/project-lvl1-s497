@@ -19,19 +19,19 @@ public class Slot {
 
         do {
 
-            log.info("У Вас {}$, ставка - {}$\n", capital, rate);
+            log.info("У Вас {}$, ставка - {}$", capital, rate);
             log.info("Крутим барабаны!Розыгрыш принёс следующие результаты:");
             firstCounter = (firstCounter + (int) round(random() * 100)) % size;
             secondCounter = (secondCounter + (int) round(random() * 100)) % size;
             thirdCounter = (thirdCounter + (int) round(random() * 100)) % size;
-            log.info("первый барабан - {} второй барабан - {} третий барабан - {}\n", firstCounter, secondCounter, thirdCounter);
+            log.info("первый барабан - {} второй барабан - {} третий барабан - {}", firstCounter, secondCounter, thirdCounter);
             if (firstCounter == secondCounter && firstCounter == thirdCounter) {
                 capital = capital + winSumma;
-                log.info("Выйгрыш {}$, ваш капитал теперь составляет: {}$\n", winSumma, capital);
+                log.info("Выйгрыш {}$, ваш капитал теперь составляет: {}$", winSumma, capital);
             }
             else {
                 capital = capital - rate;
-                log.info("Проигрыш {}$, ваш капитал теперь составляет: {}$\n", rate, capital);
+                log.info("Проигрыш {}$, ваш капитал теперь составляет: {}$", rate, capital);
             }
         }
     while (capital > 0);
